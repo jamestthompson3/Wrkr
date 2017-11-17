@@ -5,7 +5,9 @@
   "dependencies": {
     "downshift": "^1.18.0",
     "formik": "^0.10.4",
+    "gh-pages": "^1.0.0",
     "react": "^16.1.1",
+    "react-cookie": "^2.1.1",
     "react-dom": "^16.1.1",
     "styled-components": "^2.2.3",
     "superagent": "^3.8.1"
