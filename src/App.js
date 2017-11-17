@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { withCookies } from 'react-cookie'
+import { makeRequest } from './common/api/signspace'
 
-
+// { value: 'e4618d365ec342bb8a3f5a67acf5d3df', path: '/', domain: 'app.signspace.com' })
 class App extends Component {
   componentDidMount() {
-    const { cookies } = this.props
-    cookies.set('session_id', 'e4618d365ec342bb8a3f5a67acf5d3df', { path: '/', domain: 'app.signspace.com' })
+    makeRequest('messages')
+      .then(response => console.log(response))
   }
   render() {
     return (
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default withCookies(App)
+export default App
