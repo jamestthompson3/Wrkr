@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { withCookies, Cookies } from 'react-cookie'
+import { withCookies } from 'react-cookie'
+
 
 class App extends Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
-  }
   componentDidMount() {
     const { cookies } = this.props
-    cookies.set('session_id', 'e4618d365ec342bb8a3f5a67acf5d3df', { path: '/', expires: 'Session', domain: 'app.signspace.com' })
+    cookies.set('session_id', 'e4618d365ec342bb8a3f5a67acf5d3df', { path: '/', domain: 'app.signspace.com' })
   }
   render() {
     return (
