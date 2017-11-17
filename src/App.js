@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import styled from 'styled-components'
 import { makeRequest } from './common/api/signspace'
 
-// { value: 'e4618d365ec342bb8a3f5a67acf5d3df', path: '/', domain: 'app.signspace.com' })
+const Header = styled.header`
+  background-color: #e6a833;
+  height: 70px;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 0 9px 0px #403f3f;
+  text-align: center;
+`
 class App extends Component {
   componentDidMount() {
     makeRequest('messages')
@@ -12,10 +18,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+        <Header>
+          <h1>Welcome to Wrkr!</h1>
+        </Header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
