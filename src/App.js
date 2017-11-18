@@ -7,7 +7,7 @@ import NewContractPage from './components/NewContractPage'
 
 
 const theme = {
-  primaryColor: '#E6A833'
+  primaryColor: '#f1c965'
 }
 
 class App extends Component {
