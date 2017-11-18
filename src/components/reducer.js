@@ -18,9 +18,9 @@ const initialContracts = {
     signDate: '20.10.2017',
     legal,
     items: [
-      { id: 1, text: '', done: true },
-      { id: 2, text: '', done: true },
-      { id: 3, text: '', done: false }
+      { id: 1, text: 'Tear out old fixtures', done: true },
+      { id: 2, text: 'Build sets for new kitchen', done: true },
+      { id: 3, text: 'Municipal sign off', done: false }
     ],
     status: IN_PROGRESS
   },
@@ -36,8 +36,9 @@ const initialContracts = {
     signDate: '20.10.2017',
     legal,
     items: [
-      { id: 1, text: '', done: true },
-      { id: 2, text: '', done: true }
+      { id: 1, text: 'Take out old tiles', done: true },
+      { id: 2, text: 'Municpal inspection', done: true },
+      { id: 3, text: 'Install new tiles', done: true }
     ],
     status: INVOICE_REQUEST
   },
@@ -53,8 +54,11 @@ const initialContracts = {
     signDate: '05.11.2017',
     legal,
     items: [
-      { id: 1, text: '', done: true },
-      { id: 2, text: '', done: true }
+      { id: 1, text: 'Preliminary tear down', done: true },
+      { id: 2, text: 'Pour footings', done: true },
+      { id: 3, text: 'Framing', done: true },
+      { id: 4, text: 'Municipal inspection', done: false },
+      { id: 5, text: 'Finish work', done: false }
     ],
     status: IN_PROGRESS
   },
@@ -70,10 +74,10 @@ const initialContracts = {
     signDate: '15.10.2017',
     legal,
     items: [
-      { id: 1, text: '', done: true },
-      { id: 2, text: '', done: true }
+      { id: 1, text: 'Remove old cabinets', done: true },
+      { id: 2, text: 'Install new cabinets', done: false }
     ],
-    status: 'circle'
+    status: IN_PROGRESS
   },
   'asdi32340234': {
     id: 'asdi32340234',
@@ -87,8 +91,8 @@ const initialContracts = {
     signDate: null,
     legal,
     items: [
-      { id: 1, text: '', done: true },
-      { id: 2, text: '', done: true }
+      { id: 1, text: 'Get municipal permit', done: false },
+      { id: 2, text: 'Install new sauna', done: false }
     ],
     status: SIGN_REQUEST
   },
@@ -104,8 +108,8 @@ const initialContracts = {
     signDate: '20.07.2017',
     legal,
     items: [
-      { id: 1, text: '', done: true },
-      { id: 2, text: '', done: true }
+      { id: 1, text: 'Install new doors', done: true },
+      { id: 2, text: 'Install new windows', done: true }
     ],
     status: COMPLETE
   }
