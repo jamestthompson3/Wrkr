@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import PageWrapper from './PageWrapper'
+import * as actions from './actions'
+import * as selectors from './selectors'
+
 
 const devData = [
   { customer: 'Helsinki University', startDate: '11.11.2017', endDate: '03.23.2018', address: 'Merikatu 14 A, Heslinki', contact: 'Pekka Hämmälainen',  contactPhone: '0432348746', contactEmail: 'pekkH@hsy.fi', status: 'hourglass-half' },
@@ -10,6 +14,7 @@ const devData = [
   { customer: 'City of Espoo', startDate: '04.08.2017', endDate: '24.05.2019', address: 'Rantapolku 23 C, Helsinki', contact: 'Janne Kaaja',  contactPhone: '084384565', contactEmail: 'kjann@yahoo.com', active: 'true', status: 'circle' },
   { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', address: 'Mannerhieminkatu 1, Helsinki', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com',  status: 'check' }
 ]
+
 const NewContractButton = styled(Link)`
   position: absolute;
   bottom: 25px;
@@ -27,6 +32,7 @@ const NewContractButton = styled(Link)`
   box-shadow: 0 0 2px 2px #50453f4f;
   text-decoration: none;
 `
+
 const Panel = styled.li`
   height: ${p => p.expanded ? '300px' : '100px'};
   transition: all 0.4s ease;
@@ -49,6 +55,7 @@ const Panel = styled.li`
     margin: 2px 0;
   }
 `
+
 const PanelActions = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,6 +67,7 @@ const PanelActions = styled.div`
     color: green;
   }
 `
+
 const PanelContent = styled.div`
   display: flex;
   flex: 1;
@@ -68,6 +76,7 @@ const PanelContent = styled.div`
     cursor: pointer;
   }
 `
+
 const Icon = styled.i`
   margin: 0.3rem;
   padding: 3px;
@@ -77,6 +86,7 @@ const Icon = styled.i`
   cursor: pointer;
   text-decoration: none;
 `
+
 const ContractsWrapper = styled.ul`
   width: 100%;
   height: 100%;
@@ -103,6 +113,9 @@ class ContractsPage extends Component {
 
   render() {
     const { expanded } = this.state
+    const { contracts } = this.props
+    console.log(contracts)
+
     return (
       <PageWrapper title='Contracts'>
         <ContractsWrapper>
@@ -132,4 +145,8 @@ class ContractsPage extends Component {
   }
 }
 
-export default ContractsPage
+const mapState = state => ({
+  contracts: selectors.getContracts(state)
+})
+
+export default connect(mapState, actions)(ContractsPage)
