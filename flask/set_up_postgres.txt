@@ -1,0 +1,21 @@
+docker run -d --name timescaledb -p 5432:5432 timescale/timescaledb
+
+docker exec -it timescaledb psql -U postgres
+
+-- Extend the database with TimescaleDB
+CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+
+-- We start by creating a regular SQL table
+
+CREATE TABLE worker (
+  Time        TIMESTAMPTZ       NOT NULL,
+  WorkerID    INT              NOT NULL,
+  Location    DOUBLE PRECISION  NULL,
+  Company     DOUBLE PRECISION  NULL
+);
+
+
+SELECT create_hypertable('WorkerID', 'Time');
+
+
+
