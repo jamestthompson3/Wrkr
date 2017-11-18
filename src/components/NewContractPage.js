@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 
 import PageWrapper from './PageWrapper'
+import * as actions from './actions'
+import { legal, SIGN_REQUEST } from './reducer'
+import { setTimeout } from 'timers';
 
+
+const getId = () => Math.random().toString(36).substr(2, 10)
 
 const Form = styled.form`
   padding: 20px;
@@ -50,27 +56,35 @@ class NewContractPage extends Component {
       <PageWrapper title='New Contract'>
         <Formik
           initialValues={{
-            company: '',
-            name: '',
+            id: getId(),
+            customer: '',
             address: '',
-            email: '',
-            phone: '',
-            contractItems: [],
+            contactName: '',
+            contactEmail: '',
+            contactPhone: '',
+            items: [],
             startDate: '',
             endDate: '',
-            legal: ''
+            signDate: null,
+            legal,
+            status: SIGN_REQUEST
           }}
           onSubmit={(values, actions) => {
-            console.log(values)
+            const { addContract, history } = this.props
+            setTimeout(() => {
+              addContract(values)
+              actions.setSubmitting(false)
+              history.push('/')
+            }, 1000)
           }}
           render={props => (
             <Form onSubmit={props.handleSubmit}>
               <FormHeader>Customer</FormHeader>
-              <StyledField type='text' name='company' placeholder='Company' />
-              <StyledField type='text' name='name' placeholder='Name' />
+              <StyledField type='text' name='customer' placeholder='Company' />
+              <StyledField type='text' name='contactName' placeholder='Name' />
               <StyledField type='text' name='address' placeholder='Address' />
-              <StyledField type='email' name='email' placeholder='Email' />
-              <StyledField type='phone' name='phone' placeholder='Phone' />
+              <StyledField type='email' name='contactEmail' placeholder='Email' />
+              <StyledField type='phone' name='contactPhone' placeholder='Phone' />
               <FormHeader>Contract Items</FormHeader>
               <FormHeader>Terms</FormHeader>
               <FormHeader>Legal</FormHeader>
@@ -86,4 +100,4 @@ class NewContractPage extends Component {
   }
 }
 
-export default NewContractPage
+export default connect(null, actions)(NewContractPage)
