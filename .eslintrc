@@ -79,7 +79,7 @@
     "react/prop-types": 0,
     "prefer-const": 2,
     "no-console": 1,
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "object-curly-spacing": [2, "always"],
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true, "mode": "strict" }],
     "eol-last": [2, "always"]
