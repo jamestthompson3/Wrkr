@@ -2,7 +2,7 @@
   "name": "wrkr",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jamestthompson3.github.io/Wrkr/",
+  "homepage": "https://wrkr.space",
   "dependencies": {
     "downshift": "^1.18.0",
     "formik": "^0.10.4",
