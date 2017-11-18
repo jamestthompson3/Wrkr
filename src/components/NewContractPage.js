@@ -2,32 +2,59 @@ import React, { Component } from 'react'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import 'react-dates/initialize'
+import 'react-dates/lib/css/_datepicker.css'
+import { DateRangePicker } from 'react-dates'
+import moment from 'moment'
 
 import PageWrapper from './PageWrapper'
 import * as actions from './actions'
 import { legal, SIGN_REQUEST } from './reducer'
-import { setTimeout } from 'timers';
 
 
 const getId = () => Math.random().toString(36).substr(2, 10)
 
 const Form = styled.form`
+  box-sizing: border-box;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  textarea[name='legal'] {
+    opacity: 0.5;
+    min-height: 100px;
+    font-size: 1rem;
+    resize: vertical;
+  }
+  .DateRangePickerInput {
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    background: transparent;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .DateInput_input {
+    background: transparent;
+    padding: 8px;
+  }
+  .DateInput {
+    width: 50%;
+    background: transparent;
+  }
 `
 
 const FormHeader = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 10px 0 5px 0;
 `
 
 const StyledField = styled(Field)`
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-  padding: 2px;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  padding: 8px;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `
 
 // const FormSection = styled.div`
@@ -51,6 +78,10 @@ const SubmitButton = styled.button`
 `
 
 class NewContractPage extends Component {
+  state = {
+    focusedInput: null
+  }
+
   render() {
     return (
       <PageWrapper title='New Contract'>
@@ -63,8 +94,8 @@ class NewContractPage extends Component {
             contactEmail: '',
             contactPhone: '',
             items: [],
-            startDate: '',
-            endDate: '',
+            startDate: null,
+            endDate: null,
             signDate: null,
             legal,
             status: SIGN_REQUEST
@@ -80,15 +111,29 @@ class NewContractPage extends Component {
           render={props => (
             <Form onSubmit={props.handleSubmit}>
               <FormHeader>Customer</FormHeader>
-              <StyledField type='text' name='customer' placeholder='Company' />
-              <StyledField type='text' name='contactName' placeholder='Name' />
-              <StyledField type='text' name='address' placeholder='Address' />
-              <StyledField type='email' name='contactEmail' placeholder='Email' />
-              <StyledField type='phone' name='contactPhone' placeholder='Phone' />
+              <StyledField type='text' name='customer' placeholder='Company' required />
+              <StyledField type='text' name='contactName' placeholder='Name' required />
+              <StyledField type='text' name='address' placeholder='Address' required />
+              <StyledField type='email' name='contactEmail' placeholder='Email' required />
+              <StyledField type='phone' name='contactPhone' placeholder='Phone' required />
               <FormHeader>Contract Items</FormHeader>
               <FormHeader>Terms</FormHeader>
+              <DateRangePicker
+                startDate={props.values.startDate && moment(props.values.startDate, 'DD.MM.YYYY')}
+                endDate={props.values.endDate && moment(props.values.endDate, 'DD.MM.YYYY')}
+                onDatesChange={({ startDate, endDate }) => props.setValues({
+                  startDate: startDate && startDate.format('DD.MM.YYYY'),
+                  endDate: endDate && endDate.format('DD.MM.YYYY')
+                })}
+                focusedInput={this.state.focusedInput}
+                onFocusChange={focusedInput => this.setState({ focusedInput })}
+                required
+                withPortal
+                orientation='vertical'
+                displayFormat='DD.MM.YYYY'
+              />
               <FormHeader>Legal</FormHeader>
-              <StyledField type='phone' name='legal' placeholder='legal' />
+              <StyledField component='textarea' name='legal' placeholder='legal' />
               <SubmitButton type='submit' disabled={props.isSubmitting}>
                 Send Contract
               </SubmitButton>
