@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 
 const Background = styled.div`
@@ -52,8 +53,9 @@ const LogoImg = styled.div`
   background-position: center;
 `
 
-const LogoText = styled.div`
+const LogoText = styled.h1`
   padding: 10px;
+  margin: 0;
   line-height: 50px;
   font-size: 2rem;
   font-weight: 700;
@@ -64,10 +66,11 @@ const PageWrapper = ({ title, children }) => (
     <Wrapper>
       <Header>
         <Logo>
-          <LogoWrapper><LogoImg /></LogoWrapper>
-          <LogoText>Wrkr</LogoText>
+          <Link to='/'>
+            <LogoWrapper><LogoImg /></LogoWrapper>
+          </Link>
+          <LogoText>Wrkr | {title}</LogoText>
         </Logo>
-        <h1>{title}</h1>
       </Header>
       <Content>
         {children}
