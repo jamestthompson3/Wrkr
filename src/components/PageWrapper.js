@@ -33,6 +33,29 @@ const Content = styled.main`
 `
 
 const Logo = styled.div`
+  display: flex;
+`
+
+const LogoWrapper = styled.div`
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+`
+
+const LogoImg = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  background-image: url(wrkr.png);
+  background-size: contain;
+  background-position: center;
+`
+
+const LogoText = styled.div`
+  padding: 10px;
+  line-height: 50px;
+  font-size: 2rem;
   font-weight: 700;
 `
 
@@ -40,7 +63,10 @@ const PageWrapper = ({ title, children }) => (
   <Background>
     <Wrapper>
       <Header>
-        <Logo>Wrkr</Logo>
+        <Logo>
+          <LogoWrapper><LogoImg /></LogoWrapper>
+          <LogoText>Wrkr</LogoText>
+        </Logo>
         <h1>{title}</h1>
       </Header>
       <Content>
