@@ -5,14 +5,10 @@ import { Link } from 'react-router-dom'
 import PageWrapper from './PageWrapper'
 
 const devData = [
-  { customer: 'Helsinki University', startDate: '11.11.2017', endDate: '03.23.2018', contact: 'Pekka Hämmälainen',  contactPhone: '0432348746', contactEmail: 'pekkH@hsy.fi' },
-  { customer: 'Lapalainen, Juuko', startDate: '28.10.2017', endDate: '01.09.2018', contact: 'Juuko Lapalainen',  contactPhone: '093334546', contactEmail: 'juuLap@gmail.com', active: 'true' },
-  { customer: 'City of Espoo', startDate: '04.08.2017', endDate: '24.05.2019', contact: 'Janne Kaaja',  contactPhone: '084384565', contactEmail: 'kjann@yahoo.com' },
-  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
-  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
-  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
-  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
-  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
+  { customer: 'Helsinki University', startDate: '11.11.2017', endDate: '03.23.2018', address: 'Merikatu 14 A, Heslinki', contact: 'Pekka Hämmälainen',  contactPhone: '0432348746', contactEmail: 'pekkH@hsy.fi', status: 'hourglass-half' },
+  { customer: 'Lapalainen, Juuko', startDate: '28.10.2017', endDate: '01.09.2018', address: 'Riistapolku 14 A, Espoo', contact: 'Juuko Lapalainen',  contactPhone: '093334546', contactEmail: 'juuLap@gmail.com', active: 'true', status: 'circle' },
+  { customer: 'City of Espoo', startDate: '04.08.2017', endDate: '24.05.2019', address: 'Rantapolku 23 C, Helsinki', contact: 'Janne Kaaja',  contactPhone: '084384565', contactEmail: 'kjann@yahoo.com', active: 'true', status: 'circle' },
+  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', address: 'Mannerhieminkatu 1, Helsinki', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com',  status: 'check' }
 ]
 const NewContractButton = styled(Link)`
   position: absolute;
@@ -32,27 +28,54 @@ const NewContractButton = styled(Link)`
   text-decoration: none;
 `
 const Panel = styled.li`
-  flex: 1 7;
+  height: ${p => p.expanded ? '300px' : '100px'};
   transition: all 0.4s ease;
   transition-delay: 0s;
-  background: ${({ active }) => active ? '#e67150' : '#6f5a3e87'};
+  background: ${({ active }) => active ? 'radial-gradient(circle at top left, #3b3b56, #3b3b56, #2a2a3e)' : 'radial-gradient(circle at top left, #c1c1c1, #c1c1c1, #6f5a3e87)'};
   color: ${({ active }) => active ? '#f1c965' : 'black'};
   display: flex;
-  flex-direction: column;
-  width: 98%;
+  width: 95%;
   margin: auto;
-  padding: 10px 0px;
+  padding: 10px 8px;
   box-shadow: 0px 0px 11px 1px #676767a3;
   justify-content: space-around;
   border-radius: 5px;
   overflow: hidden;
   margin-top: 0.35rem;
   h2 {
-    margin: auto;
+    margin: 0;
   }
   p {
-    margin: 0.3rem;
+    margin: 2px 0;
   }
+`
+const PanelActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  a {
+    color: inherit;
+  }
+  .fa-circle {
+    color: green;
+  }
+`
+const PanelContent = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  i {
+    cursor: pointer;
+  }
+`
+const Icon = styled.i`
+  margin: 0.3rem;
+  padding: 3px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: 2px solid;
+  cursor: pointer;
+  text-decoration: none;
 `
 const ContractsWrapper = styled.ul`
   width: 100%;
@@ -64,25 +87,40 @@ const ContractsWrapper = styled.ul`
 `
 
 class ContractsPage extends Component {
-  componentDidMount() {
-    this.loadContracts()
+  state = {
+    expanded: null
   }
 
   loadContracts = () => {
     console.log('loading contracts...')
   }
 
+  handleClick = i => {
+    this.setState(prevState => ({
+      expanded: prevState.expanded === i ? null : i
+    }))
+  }
+
   render() {
+    const { expanded } = this.state
     return (
       <PageWrapper title='Contracts'>
         <ContractsWrapper>
           {devData.map((contract, i) =>
-            <Panel active={contract.active} key={i}>
-              <h2>{contract.customer}</h2>
-              <p>{contract.signedDate}</p>
-              <p>{contract.contact}</p>
-              <p>{contract.contactPhone}</p>
-              <p>{contract.contactEmail}</p>
+            <Panel active={contract.active} key={i} expanded={i === expanded}>
+              <PanelContent>
+                <h2>{contract.customer}</h2>
+                <p>{contract.address}</p>
+                <p>{contract.contact}</p>
+                <i style={{ marginTop: '10px' }} className={`fa fa-fw fa-chevron-${i === expanded ? 'up' : 'down'}`} onClick={() => this.handleClick(i)}  />
+              </PanelContent>
+              <PanelActions>
+                <div>
+                  <a href={`mailto:${contract.contactEmail}`}><Icon className="fa fa-fw fa-envelope" /></a>
+                  <a href={`tel:${contract.contactPhone}`}><Icon className="fa fa-fw fa-phone" /></a>
+                </div>
+                <i style={{ alignSelf: 'flex-end' }} className={`fa fa-fw fa-${contract.status}`} />
+              </PanelActions>
             </Panel>
           )}
         </ContractsWrapper>
