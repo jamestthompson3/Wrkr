@@ -134,6 +134,16 @@ const reducer = (state = initialContracts, action) => {
         }
       }
     }
+    case 'CONTRACT_CHANGE_STATUS': {
+      const contract = state[action.contractId]
+      return {
+        ...state,
+        [action.contractId]: {
+          ...contract,
+          status: action.status
+        }
+      }
+    }
     default:
       return state
   }

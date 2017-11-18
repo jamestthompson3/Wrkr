@@ -13,3 +13,9 @@ export const toggleItem = (contractId, itemId) => ({
   contractId,
   itemId
 })
+
+export const changeStatus = (contractId, status) => ({
+  type: 'CONTRACT_CHANGE_STATUS',
+  contractId,
+  status
+})
