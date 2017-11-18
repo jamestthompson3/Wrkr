@@ -29,6 +29,7 @@ const Header = styled.header`
 const Content = styled.main`
   position: relative;
   flex: 1;
+  overflow-y: auto;
 `
 
 const Logo = styled.div`
