@@ -21,7 +21,6 @@ const Header = styled.header`
   height: 70px;
   padding: 20px;
   color: white;
-  box-shadow: 0 2px 5px 0 #403f3f;
   text-align: center;
 `
 
