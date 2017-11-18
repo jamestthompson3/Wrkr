@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `
 
 const Header = styled.header`
-  background-color: #e6a833;
+  background-color: #f1c965;
   height: 70px;
   padding: 20px;
   color: white;
