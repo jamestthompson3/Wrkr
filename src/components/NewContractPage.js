@@ -125,7 +125,7 @@ class NewContractPage extends Component {
               history.push('/')
             }, 1000)
           }}
-          render={props => console.log(props.values) || (
+          render={props => (
             <Form onSubmit={props.handleSubmit}>
               <FormHeader>Customer</FormHeader>
               <StyledField type='text' name='customer' placeholder='Company' required />
