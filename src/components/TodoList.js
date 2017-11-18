@@ -10,6 +10,7 @@ const TodoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
   li {
     flex:1;
     display: block;
@@ -67,10 +68,18 @@ const contractsActive = {
   COMPLETE: 0
 }
 class Todo extends Component {
-
+  componentDidUpdate() {
+    const { contract, showInvoice } = this.props
+    if (contract.items.every(item => item.done === true) === true) {
+      contract.status === 'INVOICE_REQUEST'
+        ? null
+        : contract.status === 'COMPLETE'
+          ? null
+          : showInvoice(contract.id)
+    }
+  }
   render() {
-    const { contract } = this.props
-    console.log(contract.items)
+    const { contract, toggleItem } = this.props
     return (
       <TodoWrapper>
         <ul>
@@ -78,7 +87,7 @@ class Todo extends Component {
             <li key={item.id}>
               <TodoBox active={contractsActive[contract.status]} >
                 <p>{item.text}</p>
-                <input type="checkbox" checked={item.done} onChange={ () => actions.toggleItem(contract.id, item.id) } />
+                <input type="checkbox" checked={item.done} onChange={ () => toggleItem(contract.id, item.id) } />
                 <Checkmark />
               </TodoBox>
             </li>
