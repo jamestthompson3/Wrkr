@@ -27,7 +27,6 @@ const Header = styled.header`
 `
 
 const Content = styled.main`
-  padding: 1rem;
   position: relative;
   flex: 1;
 `

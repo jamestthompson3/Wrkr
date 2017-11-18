@@ -5,17 +5,21 @@ import { Link } from 'react-router-dom'
 import PageWrapper from './PageWrapper'
 
 
-const NewContractButton = styled.button`
+const NewContractButton = styled(Link)`
   position: absolute;
   bottom: 25px;
   right: 25px;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: 700;
   color: white;
   background: ${p => p.theme.primaryColor};
-  padding: 16px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
   border-radius: 100px;
   border: none;
+  text-decoration: none;
 `
 const Panel = styled.div`
   flex: 1;
@@ -25,9 +29,10 @@ const Panel = styled.div`
   color: ${({ active }) => active ? 'f1c965' : 'black'};
 `
 const ContractsWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 2vh;
   overflow: hidden;
   box-shadow: 4vh 7vh 14vh -6vh rgba(0, 0, 0, 0.35), -4vh 7vh 14vh -6vh rgba(0, 0, 0, 0.35);
 `
@@ -56,9 +61,7 @@ class ContractsPage extends Component {
           </Panel>
         </ContractsWrapper>
 
-        <Link to='/new'>
-          <NewContractButton text='+' radius='rounded'>+</NewContractButton>
-        </Link>
+        <NewContractButton to='/new'>+</NewContractButton>
 
       </PageWrapper>
     )
