@@ -5,15 +5,19 @@ import { Link } from 'react-router-dom'
 import PageWrapper from './PageWrapper'
 
 const devData = [
-  { customer: 'Helsinki University', signedDate: '11.11.2017', contact: 'Pekka Hämmälainen',  contactPhone: '0432348746', contactEmail: 'pekkH@hsy.fi' },
-  { customer: 'Lapalainen, Juuko', signedDate: '28.10.2017', contact: 'Juuko Lapalainen',  contactPhone: '093334546', contactEmail: 'juuLap@gmail.com', active: 'true' },
-  { customer: 'City of Espoo', signedDate: '04.08.2017', contact: 'Janne Kaaja',  contactPhone: '084384565', contactEmail: 'kjann@yahoo.com' },
-  { customer: 'Kiviniemi, Tatu', signedDate: '02.08.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' }
+  { customer: 'Helsinki University', startDate: '11.11.2017', endDate: '03.23.2018', contact: 'Pekka Hämmälainen',  contactPhone: '0432348746', contactEmail: 'pekkH@hsy.fi' },
+  { customer: 'Lapalainen, Juuko', startDate: '28.10.2017', endDate: '01.09.2018', contact: 'Juuko Lapalainen',  contactPhone: '093334546', contactEmail: 'juuLap@gmail.com', active: 'true' },
+  { customer: 'City of Espoo', startDate: '04.08.2017', endDate: '24.05.2019', contact: 'Janne Kaaja',  contactPhone: '084384565', contactEmail: 'kjann@yahoo.com' },
+  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
+  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
+  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
+  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
+  { customer: 'Kiviniemi, Tatu', startDate: '02.08.2017', endDate: '12.11.2017', contact: 'Tatu Kiviniemi',  contactPhone: '054384368', contactEmail: 'tatu@aol.com', active: 'true' },
 ]
 const NewContractButton = styled(Link)`
-  position: fixed;
+  position: absolute;
   bottom: 25px;
-  right: 149px;
+  right: 25px;
   font-size: 1.5rem;
   font-weight: 700;
   color: white;
@@ -34,7 +38,6 @@ const Panel = styled.li`
   background: ${({ active }) => active ? '#e67150' : '#6f5a3e87'};
   color: ${({ active }) => active ? '#f1c965' : 'black'};
   display: flex;
-  align-items: center;
   flex-direction: column;
   width: 98%;
   margin: auto;
@@ -54,9 +57,7 @@ const Panel = styled.li`
 const ContractsWrapper = styled.ul`
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   padding: 0;
   margin: 0;
   box-shadow: 4vh 7vh 14vh -6vh rgba(0, 0, 0, 0.35), -4vh 7vh 14vh -6vh rgba(0, 0, 0, 0.35);
