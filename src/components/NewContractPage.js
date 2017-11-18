@@ -114,6 +114,7 @@ class NewContractPage extends Component {
             startDate: null,
             endDate: null,
             signDate: null,
+            price: 0,
             legal,
             status: SIGN_REQUEST
           }}
@@ -132,7 +133,7 @@ class NewContractPage extends Component {
               <StyledField type='text' name='contactName' placeholder='Name' required />
               <StyledField type='text' name='address' placeholder='Address' required />
               <StyledField type='email' name='contactEmail' placeholder='Email' required />
-              <StyledField type='phone' name='contactPhone' placeholder='Phone' required />
+              <StyledField type='tel' name='contactPhone' placeholder='Phone' required />
               <FormHeader>Contract Items</FormHeader>
               <StyledItems>
                 {props.values.items.map((item, i) => (
@@ -179,6 +180,8 @@ class NewContractPage extends Component {
                 orientation='vertical'
                 displayFormat='DD.MM.YYYY'
               />
+              <FormHeader>Price</FormHeader>
+              <StyledField type='number' name='price' placeholder='Price' required />
               <FormHeader>Legal</FormHeader>
               <StyledField component='textarea' name='legal' placeholder='legal' />
               <Button type='submit' disabled={props.isSubmitting}>

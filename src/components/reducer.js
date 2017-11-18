@@ -22,6 +22,7 @@ const initialContracts = {
       { id: 2, text: 'Build sets for new kitchen', done: true },
       { id: 3, text: 'Municipal sign off', done: false }
     ],
+    price: 2000,
     status: IN_PROGRESS
   },
   '1662ddi12344': {
@@ -40,6 +41,7 @@ const initialContracts = {
       { id: 2, text: 'Municpal inspection', done: true },
       { id: 3, text: 'Install new tiles', done: true }
     ],
+    price: 2300,
     status: INVOICE_REQUEST
   },
   'asd234234sad': {
@@ -60,6 +62,7 @@ const initialContracts = {
       { id: 4, text: 'Municipal inspection', done: false },
       { id: 5, text: 'Finish work', done: false }
     ],
+    price: 1200,
     status: IN_PROGRESS
   },
   'hlasdf234234': {
@@ -77,6 +80,7 @@ const initialContracts = {
       { id: 1, text: 'Remove old cabinets', done: true },
       { id: 2, text: 'Install new cabinets', done: false }
     ],
+    price: 500,
     status: IN_PROGRESS
   },
   'asdi32340234': {
@@ -94,6 +98,7 @@ const initialContracts = {
       { id: 1, text: 'Get municipal permit', done: false },
       { id: 2, text: 'Install new sauna', done: false }
     ],
+    price: 450,
     status: SIGN_REQUEST
   },
   '235asdf23498': {
@@ -111,6 +116,7 @@ const initialContracts = {
       { id: 1, text: 'Install new doors', done: true },
       { id: 2, text: 'Install new windows', done: true }
     ],
+    price: 200,
     status: COMPLETE
   }
 }
