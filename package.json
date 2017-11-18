@@ -9,10 +9,11 @@
     "gh-pages": "^1.1.0",
     "global": "^4.3.2",
     "js-cookie": "^2.2.0",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
-    "rebass": "^1.0.4",
+    "reactackle": "^0.0.3-beta.2",
     "styled-components": "^2.2.3",
     "superagent": "fiatjaf/superagent"
   },
