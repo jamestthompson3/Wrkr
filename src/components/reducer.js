@@ -119,6 +119,7 @@ const reducer = (state = initialContracts, action) => {
         [action.contract.id]: action.contract
       }
     case 'CONTRACT_REMOVE':
+      // eslint-disable-next-line
       const { [action.contractId]: deletedContract, restContracts } = state
       return restContracts
     case 'ITEM_TOGGLE': {
