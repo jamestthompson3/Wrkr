@@ -1,1 +1,1 @@
-export const getContracts = state => Object.values(state)
+export const getContracts = state => Object.values(state).reverse()
