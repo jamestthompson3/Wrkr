@@ -10,6 +10,7 @@ import moment from 'moment'
 import PageWrapper from './PageWrapper'
 import * as actions from './actions'
 import { legal, SIGN_REQUEST } from './reducer'
+import GeneratingContract from './GeneratingContract'
 
 
 const getId = () => Math.random().toString(36).substr(2, 10)
@@ -88,18 +89,30 @@ const Button = styled.button`
   background: transparent;
   font-weight: 700;
   border-radius: 4px;
+  background: ${p => p.theme.primaryColor};
+  color: white;
   &:hover {
-    background: ${p => p.theme.primaryColor};
-    color: white;
+    box-shadow: 0 2px 2px 1px #f1c96585;
   }
 `
 
 class NewContractPage extends Component {
   state = {
-    focusedInput: null
+    focusedInput: null,
+    loadingScreen: false
+  }
+
+  showLoading = () => {
+    this.setState({ loadingScreen: true })
   }
 
   render() {
+    const { loadingScreen, focusedInput } = this.state
+
+    if (loadingScreen) {
+      return <GeneratingContract />
+    }
+
     return (
       <PageWrapper title='New Contract'>
         <Formik
@@ -114,16 +127,16 @@ class NewContractPage extends Component {
             startDate: null,
             endDate: null,
             signDate: null,
-            price: 0,
+            price: '',
             legal,
             status: SIGN_REQUEST
           }}
           onSubmit={(values, actions) => {
-            const { addContract, history } = this.props
+            const { addContract } = this.props
             setTimeout(() => {
               addContract(values)
               actions.setSubmitting(false)
-              history.push('/')
+              this.showLoading()
             }, 1000)
           }}
           render={props => (
@@ -173,7 +186,7 @@ class NewContractPage extends Component {
                   startDate: startDate && startDate.format('DD.MM.YYYY'),
                   endDate: endDate && endDate.format('DD.MM.YYYY')
                 })}
-                focusedInput={this.state.focusedInput}
+                focusedInput={focusedInput}
                 onFocusChange={focusedInput => this.setState({ focusedInput })}
                 required
                 withPortal
