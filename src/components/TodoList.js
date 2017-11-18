@@ -30,7 +30,7 @@ const TodoBox = styled.label`
     opacity: 0;
   }
   input:checked ~ span {
-    background-color: ${p => p.theme.primaryColor};
+    background-color: ${p => p.active === 2 ? p.theme.primaryColor : '#c1c1c1'};
   }
   input:checked ~ span:after {
     display: block;
@@ -60,18 +60,25 @@ const Checkmark = styled.span`
     position: absolute;
   }
 `
+const contractsActive = {
+  SIGN_REQUEST: 1,
+  IN_PROGRESS: 2,
+  INVOICE_REQUEST: 2,
+  COMPLETE: 0
+}
 class Todo extends Component {
 
   render() {
     const { contract } = this.props
+    console.log(contract.items)
     return (
       <TodoWrapper>
         <ul>
           {contract.items.map(item =>
             <li key={item.id}>
-              <TodoBox>
+              <TodoBox active={contractsActive[contract.status]} >
                 <p>{item.text}</p>
-                <input type="checkbox" />
+                <input type="checkbox" checked={item.done} onChange={ () => actions.toggleItem(contract.id, item.id) } />
                 <Checkmark />
               </TodoBox>
             </li>
