@@ -13,7 +13,6 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
-    "reactackle": "^0.0.3-beta.2",
     "styled-components": "^2.2.3",
     "superagent": "^3.8.1"
   },
