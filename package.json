@@ -6,7 +6,8 @@
   "dependencies": {
     "downshift": "^1.18.0",
     "formik": "^0.10.4",
-    "gh-pages": "^1.0.0",
+    "gh-pages": "^1.1.0",
+    "global": "^4.3.2",
     "js-cookie": "^2.2.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
