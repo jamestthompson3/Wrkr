@@ -15,7 +15,7 @@ export const NewContractButton = styled(Link)`
   text-align: center;
   border-radius: 100px;
   border: none;
-  box-shadow: 0 0 2px 2px #50453f4f;
+  box-shadow: 0 0 2px 2px #a0a09f66;
   text-decoration: none;
 `
 
