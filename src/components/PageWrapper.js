@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   box-shadow: 0 2px 5px 0 #403f3f;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `
 
 const Header = styled.header`
