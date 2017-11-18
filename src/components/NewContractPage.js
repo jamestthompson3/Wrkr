@@ -14,6 +14,17 @@ import { legal, SIGN_REQUEST } from './reducer'
 
 const getId = () => Math.random().toString(36).substr(2, 10)
 
+const Icon = ({ name, color, className, link, ...rest }) => (
+  <i
+    className={`fa fa-fw fa-${name} ${className}`}
+    style={{
+      color,
+      cursor: link ? 'pointer' : 'initial'
+    }}
+    {...rest}
+  />
+)
+
 const Form = styled.form`
   box-sizing: border-box;
   padding: 20px;
@@ -57,12 +68,18 @@ const StyledField = styled(Field)`
   border: 1px solid rgba(0, 0, 0, 0.2);
 `
 
-// const FormSection = styled.div`
-//   margin-bottom: 20px;
-//   width: 100%;
-// `
+const StyledItems = styled.ul`
+  input {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+  }
+`
 
-const SubmitButton = styled.button`
+const Button = styled.button`
   cursor: pointer;
   padding: 10px 15px;
   font-size: 1.2rem;
@@ -93,7 +110,7 @@ class NewContractPage extends Component {
             contactName: '',
             contactEmail: '',
             contactPhone: '',
-            items: [],
+            items: [{ id: 0, text: '', done: false }],
             startDate: null,
             endDate: null,
             signDate: null,
@@ -108,7 +125,7 @@ class NewContractPage extends Component {
               history.push('/')
             }, 1000)
           }}
-          render={props => (
+          render={props => console.log(props.values) || (
             <Form onSubmit={props.handleSubmit}>
               <FormHeader>Customer</FormHeader>
               <StyledField type='text' name='customer' placeholder='Company' required />
@@ -117,11 +134,41 @@ class NewContractPage extends Component {
               <StyledField type='email' name='contactEmail' placeholder='Email' required />
               <StyledField type='phone' name='contactPhone' placeholder='Phone' required />
               <FormHeader>Contract Items</FormHeader>
+              <StyledItems>
+                {props.values.items.map((item, i) => (
+                  <li key={i}>
+                    <input
+                      type='text'
+                      name={`item${i}`}
+                      value={item.text}
+                      onChange={e => props.setFieldValue(
+                        'items',
+                        props.values.items.map((itemV, iV) => iV === i ? {
+                          ...itemV,
+                          text: e.target.value
+                        } : itemV))
+                      }
+                    />
+                    {i === props.values.items.length - 1 ? (
+                      <Icon link name='plus' color='green' onClick={() => props.setFieldValue(
+                        'items',
+                        [...props.values.items, { id: props.values.items.length, text: '', done: false }]
+                      )} />
+                    ) : (
+                      <Icon link name='remove' color='red' onClick={() => props.setFieldValue(
+                        'items',
+                        props.values.items.filter((itemV, iV) => iV !== i)
+                      )} />
+                    )}
+                  </li>
+                ))}
+              </StyledItems>
               <FormHeader>Terms</FormHeader>
               <DateRangePicker
                 startDate={props.values.startDate && moment(props.values.startDate, 'DD.MM.YYYY')}
                 endDate={props.values.endDate && moment(props.values.endDate, 'DD.MM.YYYY')}
                 onDatesChange={({ startDate, endDate }) => props.setValues({
+                  ...props.values,
                   startDate: startDate && startDate.format('DD.MM.YYYY'),
                   endDate: endDate && endDate.format('DD.MM.YYYY')
                 })}
@@ -134,9 +181,12 @@ class NewContractPage extends Component {
               />
               <FormHeader>Legal</FormHeader>
               <StyledField component='textarea' name='legal' placeholder='legal' />
-              <SubmitButton type='submit' disabled={props.isSubmitting}>
-                Send Contract
-              </SubmitButton>
+              <Button type='submit' disabled={props.isSubmitting}>
+                {props.isSubmitting
+                  ? <Icon name='spinner' className='fa-spin' />
+                  : 'Send Contract'
+                }
+              </Button>
             </Form>
           )}
         />
