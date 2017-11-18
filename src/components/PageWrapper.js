@@ -57,7 +57,7 @@ const LogoText = styled.h1`
   padding: 10px;
   margin: 0;
   line-height: 50px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
 `
 
