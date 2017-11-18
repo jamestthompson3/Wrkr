@@ -125,7 +125,7 @@ class ContractsPage extends Component {
                 <h2>{contract.customer}</h2>
                 <p>{contract.address}</p>
                 <p>{contract.contact}</p>
-                <i style={{ marginTop: '10px' }} className={`fa fa-fw fa-chevron-${i === expanded ? 'up' : 'down'}`} onClick={() => this.handleClick(i)}  />
+                <i style={{ marginTop: '10px', width: '100%', textAlign: 'left' }} className={`fa fa-fw fa-chevron-${i === expanded ? 'up' : 'down'}`} onClick={() => this.handleClick(i)}  />
               </PanelContent>
               <PanelActions>
                 <div>
