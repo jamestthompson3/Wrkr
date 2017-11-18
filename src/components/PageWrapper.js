@@ -14,6 +14,8 @@ const Wrapper = styled.div`
   background: white;
   height: 100%;
   box-shadow: 0 2px 5px 0 #403f3f;
+  display: flex;
+  flex-direction: column;
 `
 
 const Header = styled.header`
@@ -26,6 +28,8 @@ const Header = styled.header`
 
 const Content = styled.main`
   padding: 1rem;
+  position: relative;
+  flex: 1;
 `
 
 const Logo = styled.div`
