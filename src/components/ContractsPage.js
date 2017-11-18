@@ -7,14 +7,15 @@ import PageWrapper from './PageWrapper'
 
 const NewContractButton = styled.button`
   position: absolute;
+  bottom: 25px;
+  right: 25px;
   font-size: 20px;
   font-weight: 700;
   color: white;
-  background: orange;
-  bottom: 25px;
-  right: 25px;
+  background: ${p => p.theme.primaryColor};
   padding: 16px;
   border-radius: 100px;
+  border: none;
 `
 
 class ContractsPage extends Component {
@@ -32,7 +33,7 @@ class ContractsPage extends Component {
         Contracts Page
 
         <Link to='/new'>
-          <NewContractButton>+</NewContractButton>
+          <NewContractButton text='+' radius='rounded'>+</NewContractButton>
         </Link>
 
       </PageWrapper>
