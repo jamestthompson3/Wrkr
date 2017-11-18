@@ -15,15 +15,15 @@ export const NewContractButton = styled(Link)`
   text-align: center;
   border-radius: 100px;
   border: none;
-  box-shadow: 0 0 2px 2px #a0a09f66;
+  box-shadow: 0 0 20px 2px #00000066;
   text-decoration: none;
 `
 
 export const Panel = styled.li`
-  height: ${p => p.expanded ? '300px' : '100px'};
+  height: ${p => p.expanded ? '350px' : '100px'};
   transition: all 0.4s ease;
   transition-delay: 0s;
-  background: ${p => p.active === 2 ? 'radial-gradient(circle at top left, #3b3b56, #3b3b56, #2a2a3e)' : 'radial-gradient(circle at top left, #c1c1c1, #c1c1c1, #6f5a3e87)'};
+  background: ${p => p.active === 2 ? 'radial-gradient(circle at top left, #3b3b56, #3b3b56, #2a2a3e)' : 'radial-gradient(circle at top left,#a2a2a2,#a2a2a2,#5f5f5f87)'};
   color: ${({ active }) => active === 2 ? '#f1c965' : 'black'};
   display: flex;
   width: 95%;
@@ -81,4 +81,13 @@ export const ContractsWrapper = styled.ul`
   padding: 0;
   margin: 0;
   box-shadow: 4vh 7vh 14vh -6vh rgba(0, 0, 0, 0.35), -4vh 7vh 14vh -6vh rgba(0, 0, 0, 0.35);
+`
+export const ExpandedView = styled.div`
+  margin-top: 15px;
+  p {
+    font-weight: 100;
+    &:last-child {
+      margin-bottom: 5px !important;
+    }
+  }
 `

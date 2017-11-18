@@ -11,7 +11,8 @@ import {
   PanelActions,
   PanelContent,
   Icon,
-  ContractsWrapper
+  ContractsWrapper,
+  ExpandedView
 } from './ContractsPageComponents'
 
 const contractsActive = {
@@ -56,7 +57,12 @@ class ContractsPage extends Component {
                 <p>{contract.contact}</p>
                 <i style={{ marginTop: '10px', width: '100%', textAlign: 'left' }} className={`fa fa-fw fa-chevron-${i === expanded ? 'up' : 'down'}`} onClick={() => this.handleClick(i)}  />
                 { i === expanded &&
-                  <Todo contract={contract} />
+                  <ExpandedView>
+                    <p>{contract.contactName}</p>
+                    <p>{contract.startDate}-{contract.endDate}</p>
+                    <p>signed: {contract.signDate}</p>
+                    <Todo contract={contract} />
+                  </ExpandedView>
                 }
               </PanelContent>
               <PanelActions>
