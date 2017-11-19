@@ -91,3 +91,13 @@ export const ExpandedView = styled.div`
     }
   }
 `
+export const InvoiceButton = styled.button`
+  padding: 10px 8px;
+  color: ${p => p.theme.primaryColor};
+  border-radius: 5px;
+  height: 27px;
+  border: 2px solid ${p => p.theme.primaryColor};
+  background: transparent;
+  cursor: pointer;
+  line-height: 0.15;
+`
