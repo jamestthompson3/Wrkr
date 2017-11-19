@@ -10,7 +10,7 @@ import moment from 'moment'
 
 import PageWrapper from './PageWrapper'
 import * as actions from './actions'
-import { legal, SIGN_REQUEST } from './reducer'
+import { legal, SIGN_REQUEST, IN_PROGRESS } from './reducer'
 import LoadingScreen from './LoadingScreen'
 
 
@@ -158,6 +158,11 @@ class NewContractPage extends Component {
               actions.setSubmitting(false)
               this.showLoading()
             }, 1000)
+            if (values.customer === 'Ultrahack') {
+              setTimeout(() => {
+                this.props.changeStatus(values.id, IN_PROGRESS)
+              }, 10000)
+            }
           }}
           render={props => (
             <Form onSubmit={props.handleSubmit}>
