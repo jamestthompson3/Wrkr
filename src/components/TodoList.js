@@ -75,10 +75,8 @@ const contractsActive = {
 class Todo extends Component {
   componentDidUpdate() {
     const { contract, showInvoice } = this.props
-    if (contract.items.every(item => item.done === true) === true) {
-      contract.status === 'IN_PROGRESS'
-        ? showInvoice()
-        : null
+    if (contract.items.every(item => item.done === true) && contract.status === 'IN_PROGRESS') {
+      showInvoice()
     }
   }
   render() {
