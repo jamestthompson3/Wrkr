@@ -24,31 +24,38 @@ const Wrapper = styled.div`
   }
 `
 
-class GeneratingContract extends Component {
+class LoadingScreen extends Component {
   state = {
-    message: 'Generating contract...'
+    i: 0
   }
 
   componentDidMount() {
-    delay()
-      .then(() => this.setState({ message: 'Uploading to SignSpace...' }))
-      .then(delay)
-      .then(() => this.setState({ message: 'Sending to the customer...' }))
-      .then(delay)
-      .then(() => this.props.history.push('/'))
+    this.showNextMessage()
+  }
+
+  showNextMessage = () => {
+    const { i } = this.state
+    const { messages, redirectTo, history } = this.props
+    return i === messages.length
+      ? history.push(redirectTo)
+      : delay()
+        .then(() => this.setState(prevState => ({ i: prevState.i + 1 })))
+        .then(this.showNextMessage)
   }
 
   render() {
-    const { message } = this.state
+    const { i } = this.state
+    const { messages } = this.props
+
     return (
       <PageWrapper>
         <Wrapper>
           <i className='fa fa-fw fa-spin fa-spinner' />
-          {message}
+          {messages[i]}
         </Wrapper>
       </PageWrapper>
     )
   }
 }
 
-export default withRouter(GeneratingContract)
+export default withRouter(LoadingScreen)
