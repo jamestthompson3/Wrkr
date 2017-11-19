@@ -27,7 +27,8 @@ export const Panel = styled.li`
     ? 'radial-gradient(circle at top left, #3b3b56, #3b3b56, #2a2a3e)'
     : p.active === 3
       ? 'radial-gradient(circle at top left, #658df1, #658df1, #4677f2)'
-      : 'radial-gradient(circle at top left,#a2a2a2,#a2a2a2,#5f5f5f87)'};
+      : 'radial-gradient(circle at top left,#a2a2a2,#a2a2a2,#5f5f5f87)'
+  };
   color: ${({ active }) => active === 2 ? '#f1c965' : 'black'};
   display: flex;
   width: 95%;
@@ -51,6 +52,8 @@ export const PanelActions = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  aligin-items: flex-end;
+  text-align: right;
   a {
     color: inherit;
   }
