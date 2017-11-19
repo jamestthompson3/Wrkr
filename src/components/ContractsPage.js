@@ -20,7 +20,8 @@ const contractsActive = {
   SIGN_REQUEST: 1,
   IN_PROGRESS: 2,
   INVOICE_REQUEST: 2,
-  COMPLETE: 0
+  COMPLETE: 0,
+  WORK_DONE: 3
 }
 const statusIcons = {
   SIGN_REQUEST: 'hourglass',
@@ -30,14 +31,12 @@ const statusIcons = {
 }
 class ContractsPage extends Component {
   state = {
-    expanded: null,
-    invoice: null
+    expanded: null
   }
 
   showInvoiceButton = id => {
-    this.setState(prevState => ({
-      expanded: prevState.expanded === id ? null : id
-    }))
+    const { changeStatus } = this.props
+    changeStatus(id, 'WORK_DONE')
   }
   sendInvoice = contractId => {
     const { changeStatus } = this.props
@@ -52,9 +51,8 @@ class ContractsPage extends Component {
   }
 
   render() {
-    const { expanded, invoice } = this.state
+    const { expanded } = this.state
     const { contracts } = this.props
-    console.log(expanded, invoice)
     return (
       <PageWrapper title='Contracts'>
         <ContractsWrapper>
@@ -70,7 +68,7 @@ class ContractsPage extends Component {
                     <p>{contract.contactName}</p>
                     <p>{contract.startDate}-{contract.endDate}</p>
                     <p>signed: {contract.signDate}</p>
-                    <Todo contract={contract} showInvoice={this.showInvoiceButton} />
+                    <Todo contract={contract} showInvoice={() => this.showInvoiceButton(contract.id)} />
                   </ExpandedView>
                 }
               </PanelContent>
@@ -79,8 +77,8 @@ class ContractsPage extends Component {
                   <a href={`mailto:${contract.contactEmail}`}><Icon className="fa fa-fw fa-envelope" /></a>
                   <a href={`tel:${contract.contactPhone}`}><Icon className="fa fa-fw fa-phone" /></a>
                 </div>
-                { contract.id === invoice
-                  ? <InvoiceButton onClick={this.sendInvoice}>Send Invoice</InvoiceButton>
+                { contract.status === 'WORK_DONE'
+                  ? <InvoiceButton onClick={() => this.sendInvoice(contract.id)}>Send Invoice</InvoiceButton>
                   : <i style={{ alignSelf: 'flex-end' }} className={`fa fa-fw fa-${statusIcons[contract.status]}`} />
                 }
               </PanelActions>

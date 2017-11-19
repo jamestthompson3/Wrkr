@@ -31,7 +31,11 @@ const TodoBox = styled.label`
     opacity: 0;
   }
   input:checked ~ span {
-    background-color: ${p => p.active === 2 ? p.theme.primaryColor : '#c1c1c1'};
+    background-color: ${p => p.active === 2
+    ? p.theme.primaryColor
+    : p.active === 3
+      ? '#ffffff8a'
+      : '#c1c1c1'};
   }
   input:checked ~ span:after {
     display: block;
@@ -65,17 +69,16 @@ const contractsActive = {
   SIGN_REQUEST: 1,
   IN_PROGRESS: 2,
   INVOICE_REQUEST: 2,
-  COMPLETE: 0
+  COMPLETE: 0,
+  WORK_DONE: 3
 }
 class Todo extends Component {
   componentDidUpdate() {
     const { contract, showInvoice } = this.props
     if (contract.items.every(item => item.done === true) === true) {
-      contract.status === 'INVOICE_REQUEST'
-        ? null
-        : contract.status === 'COMPLETE'
-          ? null
-          : showInvoice(contract.id)
+      contract.status === 'IN_PROGRESS'
+        ? showInvoice()
+        : null
     }
   }
   render() {

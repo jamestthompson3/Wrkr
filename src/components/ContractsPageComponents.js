@@ -23,7 +23,11 @@ export const Panel = styled.li`
   height: ${p => p.expanded ? '350px' : '100px'};
   transition: all 0.4s ease;
   transition-delay: 0s;
-  background: ${p => p.active === 2 ? 'radial-gradient(circle at top left, #3b3b56, #3b3b56, #2a2a3e)' : 'radial-gradient(circle at top left,#a2a2a2,#a2a2a2,#5f5f5f87)'};
+  background: ${p => p.active === 2
+    ? 'radial-gradient(circle at top left, #3b3b56, #3b3b56, #2a2a3e)'
+    : p.active === 3
+      ? 'radial-gradient(circle at top left, #658df1, #658df1, #4677f2)'
+      : 'radial-gradient(circle at top left,#a2a2a2,#a2a2a2,#5f5f5f87)'};
   color: ${({ active }) => active === 2 ? '#f1c965' : 'black'};
   display: flex;
   width: 95%;
@@ -93,10 +97,10 @@ export const ExpandedView = styled.div`
 `
 export const InvoiceButton = styled.button`
   padding: 10px 8px;
-  color: ${p => p.theme.primaryColor};
+  color: #322F4A;
   border-radius: 5px;
   height: 27px;
-  border: 2px solid ${p => p.theme.primaryColor};
+  border: 2px solid #322F4A;
   background: transparent;
   cursor: pointer;
   line-height: 0.15;

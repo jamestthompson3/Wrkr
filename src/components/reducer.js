@@ -2,6 +2,7 @@ export const SIGN_REQUEST = 'SIGN_REQUEST'
 export const IN_PROGRESS = 'IN_PROGRESS'
 export const INVOICE_REQUEST = 'INVOICE_REQUEST'
 export const COMPLETE = 'COMPLETE'
+export const WORK_DONE = 'WORK_DONE'
 
 export const legal = 'This agreement is very straight forward and simple. It was drafted primarily for use by an individual wishing to disclose information that needs to be kept secret to another individual.'
 
