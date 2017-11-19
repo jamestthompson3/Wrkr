@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Formik, Field } from 'formik'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
@@ -10,7 +11,7 @@ import moment from 'moment'
 import PageWrapper from './PageWrapper'
 import * as actions from './actions'
 import { legal, SIGN_REQUEST } from './reducer'
-import GeneratingContract from './GeneratingContract'
+import LoadingScreen from './LoadingScreen'
 
 
 const getId = () => Math.random().toString(36).substr(2, 10)
@@ -97,6 +98,16 @@ const Button = styled.button`
 `
 
 class NewContractPage extends Component {
+  static propTypes = {
+    redirectTo: PropTypes.string,
+    messages: PropTypes.arrayOf(PropTypes.string)
+  }
+
+  static defaultProps = {
+    redirectTo: '/',
+    messages: []
+  }
+
   state = {
     focusedInput: null,
     loadingScreen: false
@@ -110,7 +121,11 @@ class NewContractPage extends Component {
     const { loadingScreen, focusedInput } = this.state
 
     if (loadingScreen) {
-      return <GeneratingContract />
+      return <LoadingScreen redirectTo='/' messages={[
+        'Generating contract...',
+        'Uploading to SignSpace...',
+        'Sending to customer...'
+      ]} />
     }
 
     return (
