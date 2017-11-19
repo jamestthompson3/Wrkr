@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
 
 import PageWrapper from './PageWrapper'
 
@@ -35,9 +34,9 @@ class LoadingScreen extends Component {
 
   showNextMessage = () => {
     const { i } = this.state
-    const { messages, redirectTo, history } = this.props
+    const { messages, onComplete } = this.props
     return i === messages.length
-      ? history.push(redirectTo)
+      ? onComplete()
       : delay()
         .then(() => this.setState(prevState => ({ i: prevState.i + 1 })))
         .then(this.showNextMessage)
@@ -58,4 +57,4 @@ class LoadingScreen extends Component {
   }
 }
 
-export default withRouter(LoadingScreen)
+export default LoadingScreen

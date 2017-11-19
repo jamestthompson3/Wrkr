@@ -33,7 +33,7 @@ const statusIcons = {
 class ContractsPage extends Component {
   state = {
     expanded: null,
-    loadingScreen: null
+    loadingScreen: false
   }
 
   showInvoiceButton = id => {
@@ -62,13 +62,18 @@ class ContractsPage extends Component {
   render() {
     const { expanded, loadingScreen } = this.state
     const { contracts } = this.props
-    // if (loadingScreen) {
-    //   return <LoadingScreen redirectTo='home' messages={[
-    //     'Generating invoice...',
-    //     'Uploading to SignSpace...',
-    //     'Sending to customer...'
-    //   ]} />
-    // }
+    if (loadingScreen) {
+      return (
+        <LoadingScreen
+          onComplete={() => this.setState({ loadingScreen: false, expanded: false })}
+          messages={[
+            'Generating invoice...',
+            'Uploading to SignSpace...',
+            'Sending to customer...'
+          ]}
+        />
+      )
+    }
     return (
       <PageWrapper title='Contracts'>
         <ContractsWrapper>

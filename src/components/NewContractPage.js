@@ -121,11 +121,16 @@ class NewContractPage extends Component {
     const { loadingScreen, focusedInput } = this.state
 
     if (loadingScreen) {
-      return <LoadingScreen redirectTo='/' messages={[
-        'Generating contract...',
-        'Uploading to SignSpace...',
-        'Sending to customer...'
-      ]} />
+      return (
+        <LoadingScreen
+          onComplete={() => this.props.history.push('/')}
+          messages={[
+            'Generating contract...',
+            'Uploading to SignSpace...',
+            'Sending to customer...'
+          ]}
+        />
+      )
     }
 
     return (
