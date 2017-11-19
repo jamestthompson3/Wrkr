@@ -15,6 +15,7 @@ import {
   ExpandedView,
   InvoiceButton
 } from './ContractsPageComponents'
+import LoadingScreen from './LoadingScreen'
 
 const contractsActive = {
   SIGN_REQUEST: 1,
@@ -31,17 +32,25 @@ const statusIcons = {
 }
 class ContractsPage extends Component {
   state = {
-    expanded: null
+    expanded: null,
+    loadingScreen: null
   }
 
   showInvoiceButton = id => {
     const { changeStatus } = this.props
     changeStatus(id, 'WORK_DONE')
   }
+
+  showLoading = () => {
+    this.setState({ loadingScreen: true })
+  }
+
   sendInvoice = contractId => {
     const { changeStatus } = this.props
-    changeStatus(contractId, 'INVOICE_REQUEST')
-    this.setState({ invoice: null })
+    setTimeout(() => {
+      changeStatus(contractId, 'INVOICE_REQUEST')
+      this.showLoading()
+    }, 1000)
   }
 
   handleClick = i => {
@@ -51,8 +60,15 @@ class ContractsPage extends Component {
   }
 
   render() {
-    const { expanded } = this.state
+    const { expanded, loadingScreen } = this.state
     const { contracts } = this.props
+    // if (loadingScreen) {
+    //   return <LoadingScreen redirectTo='home' messages={[
+    //     'Generating invoice...',
+    //     'Uploading to SignSpace...',
+    //     'Sending to customer...'
+    //   ]} />
+    // }
     return (
       <PageWrapper title='Contracts'>
         <ContractsWrapper>
