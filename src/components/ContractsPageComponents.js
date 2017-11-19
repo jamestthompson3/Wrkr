@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const NewContractButton = styled(Link)`
   position: absolute;
-  bottom: 25px;
+  bottom: 40px;
   right: 25px;
   font-size: 1.5rem;
   font-weight: 700;
